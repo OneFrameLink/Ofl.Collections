@@ -1,5 +1,4 @@
-﻿using Ofl.Hashing;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -79,6 +78,9 @@ namespace Ofl.Collections.Generic
             // If one is null and the other is not, return false.
             if (x == null || y == null) return false;
 
+            // If the references are equal, return true.
+            if (ReferenceEquals(x, y)) return true;
+
             // Sequence equals.
             return x.SequenceEqual(y, _equalityComparer);
         }
@@ -99,9 +101,23 @@ namespace Ofl.Collections.Generic
             // Validate parameters.
             if (obj == null) throw new ArgumentNullException(nameof(obj));
 
-            // Get the hash codes for the items in the enumerable, and then compose a hash of those.
-            // If the instance is null, assume 0.
-            return obj.Select(o => o?.GetHashCode() ?? 0).Compute32BitFnvCompositeHashCode();
+            // Get the enumerator.
+            using (IEnumerator<T> enumerator = obj.GetEnumerator())
+            {
+                // Get the first element, if none, return 0.
+                if (!enumerator.MoveNext()) return 0;
+
+                // Get the hash code.
+                int hash = enumerator.Current?.GetHashCode() ?? 0;
+
+                // While there are items left.
+                while (enumerator.MoveNext())
+                    // Combine.
+                    HashHelpers.Combine(hash, enumerator.Current?.GetHashCode() ?? 0);
+
+                // Return the hash.
+                return hash;
+            }
         }
 
         #endregion

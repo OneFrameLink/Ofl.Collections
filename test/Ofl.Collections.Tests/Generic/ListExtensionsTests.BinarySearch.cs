@@ -4,7 +4,7 @@ using Xunit;
 
 namespace Ofl.Collections.Tests.Generic
 {
-    public class ListExtensionsTests
+    public partial class ListExtensionsTests
     {
         #region Tests
 

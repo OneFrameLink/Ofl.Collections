@@ -15,9 +15,9 @@
 
         #region Instance, read-only state.
 
-        public T Item { get; private set; }
+        public T Item { get; }
 
-        public bool Added { get; private set; }
+        public bool Added { get; }
 
         #endregion
     }
