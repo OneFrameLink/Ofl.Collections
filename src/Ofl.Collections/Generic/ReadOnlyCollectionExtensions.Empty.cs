@@ -4,7 +4,7 @@ namespace Ofl.Collections.Generic
 {
     public static partial class ReadOnlyCollectionExtensions
     {
-        public static ReadOnlyCollection<T> EmptyReadOnlyCollection<T>() => 
+        public static ReadOnlyCollection<T> Empty<T>() => 
             EmptyReadOnlyCollectionSingleton<T>.Instance;
 
         private static class EmptyReadOnlyCollectionSingleton<T>
