@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 
 namespace Ofl.Collections.Generic
 {
@@ -19,7 +20,7 @@ namespace Ofl.Collections.Generic
 
         #region Helpers
 
-        private object ThrowNotSupportedException(string member)
+        private object ThrowNotSupportedException([CallerMemberName] string member = "")
         {
             // Validate parameters.
             if (member == null) throw new ArgumentNullException(nameof(member));
@@ -30,7 +31,7 @@ namespace Ofl.Collections.Generic
 
         #endregion
 
-        #region Read-only state and helpers.
+        #region Instance, read-only state.
 
         private readonly IReadOnlyList<T> _list;
 
@@ -40,15 +41,15 @@ namespace Ofl.Collections.Generic
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
-        public void Add(T item) => ThrowNotSupportedException(nameof(Add));
+        public void Add(T item) => ThrowNotSupportedException();
 
-        public void Clear() => ThrowNotSupportedException(nameof(Clear));
+        public void Clear() => ThrowNotSupportedException();
 
         public bool Contains(T item) => _list.Contains(item);
 
         public void CopyTo(T[] array, int arrayIndex) => Buffer.BlockCopy(this.ToArray(), 0, array, arrayIndex, Count);
 
-        public bool Remove(T item) => (bool) ThrowNotSupportedException(nameof(Remove));
+        public bool Remove(T item) => (bool)ThrowNotSupportedException();
 
         public int Count => _list.Count;
 
@@ -63,14 +64,14 @@ namespace Ofl.Collections.Generic
             return _list.Select((t, i) => new { Item = t, Index = i }).FirstOrDefault(p => comparer.Equals(p.Item, item))?.Index ?? -1;
         }
 
-        public void Insert(int index, T item) => ThrowNotSupportedException(nameof(Insert));
+        public void Insert(int index, T item) => ThrowNotSupportedException();
 
-        public void RemoveAt(int index) => ThrowNotSupportedException(nameof(RemoveAt));
+        public void RemoveAt(int index) => ThrowNotSupportedException();
 
         public T this[int index]
         {
             get => _list[index];
-            set => ThrowNotSupportedException("[] setter");
+            set => ThrowNotSupportedException();
         }
     }
 }

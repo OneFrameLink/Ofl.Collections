@@ -13,10 +13,8 @@ namespace Ofl.Collections.Generic
             if (items == null) throw new ArgumentNullException(nameof(items));
 
             // Type sniff.
-            var collection = items as ICollection<T>;
-
             // The list to store the results.
-            var added = new List<SetAddRangeResult<T>>(collection != null ? collection.Count : 1);
+            var added = new List<SetAddRangeResult<T>>(items is ICollection<T> collection ? collection.Count : 1);
 
             // Add the items.
             added.AddRange(items.Select(i => new SetAddRangeResult<T>(i, set.Add(i))));
