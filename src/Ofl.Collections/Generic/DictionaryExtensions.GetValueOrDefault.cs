@@ -5,7 +5,7 @@ namespace Ofl.Collections.Generic
 {
     public static partial class DictionaryExtensions
     {
-        public static TValue GetValueOrDefault<TKey, TValue>(this IDictionary<TKey, TValue> dictionary,
+        public static TValue GetValueOrDefault<TKey, TValue>(this Dictionary<TKey, TValue> dictionary,
             TKey key, TValue defaultValue)
         {
             // Validate parameters.
@@ -16,7 +16,7 @@ namespace Ofl.Collections.Generic
             return dictionary.TryGetValue(key, out TValue value) ? value : defaultValue;
         }
 
-        public static TValue GetValueOrDefault<TKey, TValue>(this IDictionary<TKey, TValue> dictionary,
+        public static TValue GetValueOrDefault<TKey, TValue>(this Dictionary<TKey, TValue> dictionary,
             TKey key)
         {
             // Validate parameters.
@@ -24,7 +24,7 @@ namespace Ofl.Collections.Generic
             if (key == null) throw new ArgumentNullException(nameof(key));
 
             // Call the overload.
-            return dictionary.GetValueOrDefault(key, default(TValue));
+            return dictionary.GetValueOrDefault(key, default);
         }
     }
 }

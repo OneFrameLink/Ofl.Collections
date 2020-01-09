@@ -6,7 +6,7 @@ namespace Ofl.Collections.Generic
     public static partial class DictionaryExtensions
     {
         public static TValue GetValueOrDefaultCascading<TKey, TValue>(
-            this IEnumerable<IDictionary<TKey, TValue>> dictionaries,
+            this IEnumerable<Dictionary<TKey, TValue>> dictionaries,
             TKey key, TValue defaultValue)
         {
             // Validate parameters.
@@ -18,7 +18,7 @@ namespace Ofl.Collections.Generic
         }
 
         public static TValue GetValueOrDefaultCascading<TKey, TValue>(
-            this IEnumerable<IDictionary<TKey, TValue>> dictionaries,
-            TKey key) => dictionaries.GetValueOrDefaultCascading(key, default(TValue));
+            this IEnumerable<Dictionary<TKey, TValue>> dictionaries,
+            TKey key) => dictionaries.GetValueOrDefaultCascading(key, default);
     }
 }

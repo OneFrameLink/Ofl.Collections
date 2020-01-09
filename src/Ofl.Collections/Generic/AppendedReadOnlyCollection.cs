@@ -11,9 +11,9 @@ namespace Ofl.Collections.Generic
         internal AppendedReadOnlyCollection(IReadOnlyCollection<T> root, T item)
         {
             // Validate parameters.
+            _enumerable = root?.Append(item) ?? throw new ArgumentNullException(nameof(root));
 
             // Assign values.
-            _enumerable = root?.Append(item) ?? throw new ArgumentNullException(nameof(root));
             Count = root.Count + 1;
         }
 

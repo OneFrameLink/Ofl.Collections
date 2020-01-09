@@ -79,10 +79,8 @@ namespace Ofl.Collections.Generic
             if (x == null || y == null) return false;
 
             // If the references are equal, return true.
-            if (ReferenceEquals(x, y)) return true;
-
-            // Sequence equals.
-            return x.SequenceEqual(y, _equalityComparer);
+            // Otherwise call sequence equals.
+            return ReferenceEquals(x, y) || x.SequenceEqual(y, _equalityComparer);
         }
 
         //////////////////////////////////////////////////
@@ -101,23 +99,11 @@ namespace Ofl.Collections.Generic
             // Validate parameters.
             if (obj == null) throw new ArgumentNullException(nameof(obj));
 
-            // Get the enumerator.
-            using (IEnumerator<T> enumerator = obj.GetEnumerator())
-            {
-                // Get the first element, if none, return 0.
-                if (!enumerator.MoveNext()) return 0;
-
-                // Get the hash code.
-                int hash = enumerator.Current?.GetHashCode() ?? 0;
-
-                // While there are items left.
-                while (enumerator.MoveNext())
-                    // Combine.
-                    HashHelpers.Combine(hash, enumerator.Current?.GetHashCode() ?? 0);
-
-                // Return the hash.
-                return hash;
-            }
+            // Aggregate.
+            return obj.Aggregate(new HashCode(), (hc, t) => {
+                hc.Add(t, _equalityComparer);
+                return hc;
+            }, hc => hc.ToHashCode());
         }
 
         #endregion

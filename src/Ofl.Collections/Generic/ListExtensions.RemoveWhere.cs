@@ -16,7 +16,7 @@ namespace Ofl.Collections.Generic
         /// the items from.</param>
         /// <param name="predicate">The <see cref="Func{T, TResult}"/> that will
         /// be used to filter the items in the list.</param>
-        /// <returns>A sequence of the items that satisified the conditions
+        /// <returns>A sequence of the items that satisfied the conditions
         /// and were removed from the list.</returns>
         /// <typeparam name="T">The type of the list.</typeparam>
         ///

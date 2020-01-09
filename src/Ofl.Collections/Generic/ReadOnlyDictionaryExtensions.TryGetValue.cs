@@ -1,11 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace Ofl.Collections.Generic
 {
     public static partial class ReadOnlyDictionaryExtensions
     {
-        public static TValue? TryGetValue<TKey, TValue>(this IReadOnlyDictionary<TKey, TValue> dictionary,
+        public static TValue? TryGetValue<TKey, TValue>(this ReadOnlyDictionary<TKey, TValue> dictionary,
             TKey key)
             where TValue : struct
         {

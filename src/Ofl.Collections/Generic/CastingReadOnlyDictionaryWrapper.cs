@@ -26,12 +26,9 @@ namespace Ofl.Collections.Generic
 
         #endregion
 
-        public IEnumerator<KeyValuePair<TToKey, TToValue>> GetEnumerator()
-        {
-            // Retrun a projection.
-            return _source.Select(p => new KeyValuePair<TToKey, TToValue>(p.Key, p.Value)).
+        public IEnumerator<KeyValuePair<TToKey, TToValue>> GetEnumerator() =>
+            _source.Select(p => new KeyValuePair<TToKey, TToValue>(p.Key, p.Value)).
                 GetEnumerator();
-        }
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
@@ -41,11 +38,8 @@ namespace Ofl.Collections.Generic
 
         public bool TryGetValue(TToKey key, out TToValue value)
         {
-            // The output type.
-            TFromValue typedValue;
-
             // Try and get the value;
-            bool result = _source.TryGetValue((TFromKey) key, out typedValue);
+            bool result = _source.TryGetValue((TFromKey) key, out TFromValue typedValue);
 
             // Set the value.
             value = typedValue;
