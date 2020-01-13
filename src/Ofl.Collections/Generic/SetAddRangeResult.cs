@@ -1,6 +1,6 @@
 ﻿namespace Ofl.Collections.Generic
 {
-    public class SetAddRangeResult<T>
+    public readonly struct SetAddRangeResult<T>
     {
         #region Constructor.
 
