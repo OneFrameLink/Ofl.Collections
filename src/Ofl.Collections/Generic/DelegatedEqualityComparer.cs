@@ -23,24 +23,8 @@ namespace Ofl.Collections.Generic
 
         #endregion
 
-        public bool Equals(T x, T y)
-        {
-            // What's null.
-            bool xNull = x == null;
-            bool yNull = y == null;
+        public bool Equals(T x, T y) => _equals(x, y);
 
-            // If both are null, or one is null and the other is not, then return those.
-            if (xNull && yNull) return true;
-            if (xNull || yNull) return false;
-
-            // Call equals.
-            return _equals(x, y);
-        }
-
-        public int GetHashCode(T obj)
-        {
-            // Call get hash code.
-            return _getHashCode(obj);
-        }
+        public int GetHashCode(T obj) => _getHashCode(obj);
     }
 }

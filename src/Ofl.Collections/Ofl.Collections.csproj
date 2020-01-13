@@ -8,6 +8,7 @@
     <RepositoryUrl>https://github.com/OneFrameLink/Ofl.Collections.git</RepositoryUrl>
     <Version>2.0.0</Version>
     <PackageTags>collections</PackageTags>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="System.Collections.Immutable" Version="1.7.0" />

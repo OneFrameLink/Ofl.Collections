@@ -7,7 +7,8 @@ namespace Ofl.Collections.Generic
     {
         public static IReadOnlyDictionary<TToKey, TToValue> Cast<TFromKey, TFromValue, TToKey, TToValue>(
             this IReadOnlyDictionary<TFromKey, TFromValue> source)
-            where TFromKey : TToKey
+            where TToKey : notnull
+            where TFromKey : notnull, TToKey
             where TFromValue : TToValue
         {
             // Validate parameters.

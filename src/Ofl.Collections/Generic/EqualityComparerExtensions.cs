@@ -5,23 +5,26 @@ namespace Ofl.Collections.Generic
 {
     public static class EqualityComparerExtensions
     {
-        public static IEqualityComparer<T> CreateFromProperty<T, TProperty>(Func<T, TProperty> getter)
+        public static IEqualityComparer<T> CreateFromProperty<T, TProperty>(
+            Func<T, TProperty> getter
+        ) => CreateFromProperty(getter, EqualityComparer<TProperty>.Default);
+
+        public static IEqualityComparer<T> CreateFromProperty<T, TProperty>(
+            Func<T, TProperty> getter,
+            IEqualityComparer<TProperty> equalityComparer
+        )
         {
             // Validate parameters.
             if (getter == null) throw new ArgumentNullException(nameof(getter));
+            if (equalityComparer == null) throw new ArgumentNullException(nameof(equalityComparer));
+
+            // Create the equals and get hash code methods on
+            // instances of T.
+            int GetHashCode(T t) => equalityComparer.GetHashCode(getter(t));
+            bool Equals(T x, T y) => equalityComparer.Equals(getter(x), getter(y));
 
             // Call the overload.
-            return Create<T>((x, y) => getter(x).Equals(getter(y)), t => getter(t).GetHashCode());
-        }
-
-        public static IEqualityComparer<T> Create<T>(Func<T, T, bool> equals, Func<T, int> getHashCode)
-        {
-            // Validate parameters.
-            if (equals == null) throw new ArgumentNullException(nameof(@equals));
-            if (getHashCode == null) throw new ArgumentNullException(nameof(getHashCode));
-
-            // Return the delegated one.
-            return new DelegatedEqualityComparer<T>(equals, getHashCode);
+            return new DelegatedEqualityComparer<T>(Equals, GetHashCode);
         }
     }
 }

@@ -27,41 +27,14 @@ namespace Ofl.Collections.Generic
 
         #region Implementation of IEnumerable
 
-        /// <summary>
-        /// Returns an enumerator that iterates through the collection.
-        /// </summary>
-        /// <returns>
-        /// A <see cref="T:System.Collections.Generic.IEnumerator`1"/> that can be used to iterate through the collection.
-        /// </returns>
-        public IEnumerator<T> GetEnumerator()
-        {
-            // Return the enumerator with the last item concatenated.
-            // Cannot use extension method, as it will call append on IReadOnlyCollection, recursing infinitely.
-            return _enumerable.GetEnumerator();
-        }
+        public IEnumerator<T> GetEnumerator() => _enumerable.GetEnumerator();
 
-        /// <summary>
-        /// Returns an enumerator that iterates through a collection.
-        /// </summary>
-        /// <returns>
-        /// An <see cref="T:System.Collections.IEnumerator"/> object that can be used to iterate through the collection.
-        /// </returns>
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            // Call the overload.
-            return GetEnumerator();
-        }
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
         #endregion
 
         #region Implementation of IReadOnlyCollection<out T>
 
-        /// <summary>
-        /// Gets the number of elements in the collection.
-        /// </summary>
-        /// <returns>
-        /// The number of elements in the collection. 
-        /// </returns>
         public int Count { get; }
 
         #endregion

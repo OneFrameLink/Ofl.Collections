@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
 namespace Ofl.Collections.Generic
 {
     internal class CastingReadOnlyDictionaryWrapper<TFromKey, TFromValue, TToKey, TToValue> : 
         IReadOnlyDictionary<TToKey, TToValue>
-        where TFromKey : TToKey
+        where TToKey : notnull
+        where TFromKey : notnull, TToKey
         where TFromValue : TToValue
     {
         #region Constructor.
@@ -36,7 +38,7 @@ namespace Ofl.Collections.Generic
 
         public bool ContainsKey(TToKey key) => _source.ContainsKey((TFromKey) key);
 
-        public bool TryGetValue(TToKey key, out TToValue value)
+        public bool TryGetValue(TToKey key, [NotNullWhen(true)] out TToValue value)
         {
             // Try and get the value;
             bool result = _source.TryGetValue((TFromKey) key, out TFromValue typedValue);

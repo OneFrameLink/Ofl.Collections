@@ -9,7 +9,8 @@ namespace Ofl.Collections.Generic
     {
         #region Constructor
 
-        public ConsecutiveReadOnlyCollections(params IReadOnlyCollection<T>[] collections) : this(collections?.WrapInReadOnlyCollection())
+        public ConsecutiveReadOnlyCollections(params IReadOnlyCollection<T>[] collections) : 
+            this(collections?.WrapInReadOnlyCollection()!)
         { }
 
         public ConsecutiveReadOnlyCollections(IReadOnlyCollection<IReadOnlyCollection<T>> collections)

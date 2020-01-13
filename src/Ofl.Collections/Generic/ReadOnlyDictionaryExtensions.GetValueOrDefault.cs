@@ -1,12 +1,18 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Ofl.Collections.Generic
 {
     public static partial class ReadOnlyDictionaryExtensions
     {
-        public static TValue GetValueOrDefault<TKey, TValue>(this ReadOnlyDictionary<TKey, TValue> dictionary,
-            TKey key, TValue defaultValue)
+        [return: MaybeNull]
+        public static TValue GetValueOrDefault<TKey, TValue>(
+            this ReadOnlyDictionary<TKey, TValue> dictionary,
+            TKey key,
+            [AllowNull] TValue defaultValue
+        )
+            where TKey : notnull
         {
             // Validate parameters.
             if (dictionary == null) throw new ArgumentNullException(nameof(dictionary));
@@ -16,8 +22,12 @@ namespace Ofl.Collections.Generic
             return dictionary.TryGetValue(key, out TValue value) ? value : defaultValue;
         }
 
-        public static TValue GetValueOrDefault<TKey, TValue>(this ReadOnlyDictionary<TKey, TValue> dictionary,
-            TKey key)
+        [return: MaybeNull]
+        public static TValue GetValueOrDefault<TKey, TValue>(
+            this ReadOnlyDictionary<TKey, TValue> dictionary,
+            TKey key
+        )
+            where TKey : notnull
         {
             // Validate parameters.
             if (dictionary == null) throw new ArgumentNullException(nameof(dictionary));

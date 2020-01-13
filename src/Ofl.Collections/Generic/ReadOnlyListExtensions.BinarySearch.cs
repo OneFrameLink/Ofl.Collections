@@ -5,30 +5,60 @@ namespace Ofl.Collections.Generic
 {
     public static partial class ReadOnlyListExtensions
     {
-        public static int BinarySearch<T>(this IReadOnlyList<T> list, T value) =>
-            list.BinarySearch(t => t, value);
+        public static int BinarySearch<T>(
+            this IReadOnlyList<T> list, 
+            T value
+        ) => list.BinarySearch(t => t, value);
 
-        public static int BinarySearch<TSource, TValue>(this IReadOnlyList<TSource> list, Func<TSource, TValue> map, TValue value) =>
-            list.BinarySearch(map, value, Comparer<TValue>.Default);
+        public static int BinarySearch<TSource, TValue>(
+            this IReadOnlyList<TSource> list, 
+            Func<TSource, TValue> map, 
+            TValue value
+        ) => list.BinarySearch(map, value, Comparer<TValue>.Default);
 
-        public static int BinarySearch<T>(this IReadOnlyList<T> list, int index, int length, T value) =>
-            list.BinarySearch(index, length, t => t, value);
+        public static int BinarySearch<T>(
+            this IReadOnlyList<T> list, 
+            int index, 
+            int length, 
+            T value
+        ) => list.BinarySearch(index, length, t => t, value);
 
-        public static int BinarySearch<TSource, TValue>(this IReadOnlyList<TSource> list, int index, int length, Func<TSource, TValue> map, TValue value) =>
-            list.BinarySearch(index, length, map, value, Comparer<TValue>.Default);
+        public static int BinarySearch<TSource, TValue>(
+            this IReadOnlyList<TSource> list, 
+            int index, 
+            int length, 
+            Func<TSource, TValue> map, TValue value
+        ) => list.BinarySearch(index, length, map, value, Comparer<TValue>.Default);
 
+        public static int BinarySearch<T>(
+            this IReadOnlyList<T> list, 
+            T value, 
+            IComparer<T> comparer
+        ) => list.BinarySearch(0, list.Count, t => t, value, comparer);
 
-        public static int BinarySearch<T>(this IReadOnlyList<T> list, T value, IComparer<T> comparer) =>
-            list.BinarySearch(0, list.Count, t => t, value, comparer);
+        public static int BinarySearch<TSource, TValue>(
+            this IReadOnlyList<TSource> list, 
+            Func<TSource, TValue> map, 
+            TValue value, 
+            IComparer<TValue> comparer
+        ) => list.BinarySearch(0, list.Count, map, value, comparer);
 
-        public static int BinarySearch<TSource, TValue>(this IReadOnlyList<TSource> list, Func<TSource, TValue> map, TValue value, IComparer<TValue> comparer) =>
-            list.BinarySearch(0, list.Count, map, value, comparer);
+        public static int BinarySearch<T>(
+            this IReadOnlyList<T> list, 
+            int index, 
+            int length, 
+            T value, 
+            IComparer<T> comparer
+        ) => list.BinarySearch(index, length, t => t, value, comparer);
 
-        public static int BinarySearch<T>(this IReadOnlyList<T> list, int index, int length, T value, IComparer<T> comparer) =>
-            list.BinarySearch(index, length, t => t, value, comparer);
-
-        public static int BinarySearch<TSource, TValue>(this IReadOnlyList<TSource> list, int index, int length, Func<TSource, TValue> map, TValue value,
-            IComparer<TValue> comparer)
+        public static int BinarySearch<TSource, TValue>(
+            this IReadOnlyList<TSource> list, 
+            int index, 
+            int length, 
+            Func<TSource, TValue> map, 
+            TValue value,
+            IComparer<TValue> comparer
+        )
         {
             // Validate parameters.
             if (list == null) throw new ArgumentNullException(nameof(list));
