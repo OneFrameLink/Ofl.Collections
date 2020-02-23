@@ -1,0 +1,13 @@
+<Project>
+  <!-- 
+    For multi-level merging, as per:
+    https://docs.microsoft.com/en-us/visualstudio/msbuild/customize-your-build?view=vs-2019#use-case-multi-level-merging
+  -->
+  <Import Project="$([MSBuild]::GetPathOfFileAbove('Directory.Build.props', '$(MSBuildThisFileDirectory)../'))" />
+  <PropertyGroup>
+    <PackageProjectUrl>https://github.com/OneFrameLink/Ofl.Collections</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/OneFrameLink/Ofl.Collections.git</RepositoryUrl>
+    <RootNamespace>Ofl.Collections</RootNamespace>
+    <PackageTags>collections list readonlycollection dictionary readonly dictionary</PackageTags>
+  </PropertyGroup>
+</Project>

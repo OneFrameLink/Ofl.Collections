@@ -1,10 +1,16 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26403.7
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29806.167
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{935A416E-DD28-4FC7-B7FF-E6F382FF2457}"
+	ProjectSection(SolutionItems) = preProject
+		src\directory.build.props = src\directory.build.props
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{8FE421C2-B5EC-4254-9F44-72F9DC29FD9E}"
+	ProjectSection(SolutionItems) = preProject
+		test\directory.build.props = test\directory.build.props
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ofl.Collections", "src\Ofl.Collections\Ofl.Collections.csproj", "{EA7BF3FE-21A8-4266-918E-60F6CAEBE26D}"
 EndProject
